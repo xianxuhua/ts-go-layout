@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package post;
+option go_package = "./;postpb";
+
+
+message GetPostDetailRequest {
+  int32 id = 1;
+}
+
+message GetUserResponse {
+  int32 id = 1;
+  string name = 2;
+}
+
+message GetPostDetailResponse {
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+  GetUserResponse user = 4;
+}
+
+message CreatePostRequest {
+  string title = 2;
+  string content = 3;
+}
+
+message CreatePostResponse {
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+}
+
+message GetPostListRequest {
+
+}
+
+message GetPostListItem {
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+}
+message GetPostListResponse {
+  int32 total = 1;
+  repeated GetPostListItem data = 2;
+}
+
+service PostService {
+  rpc GetPostList (GetPostListRequest) returns (GetPostListResponse);
+  rpc GetPostDetail (GetPostDetailRequest) returns (GetPostDetailResponse);
+  rpc CreatePost (CreatePostRequest) returns (CreatePostResponse);
+}

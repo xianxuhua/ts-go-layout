@@ -1,0 +1,12 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: post.PostService.GetPostList
+      get: /post
+    - selector: post.PostService.GetPostDetail
+      get: /post/{id}
+    - selector: post.PostService.CreatePost
+      post: /post
+      body: "*"
