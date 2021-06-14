@@ -1,7 +1,7 @@
 package main
 
 import (
-	"demo/user/model"
+	"backend/user/model"
 	_ "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
