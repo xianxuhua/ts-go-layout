@@ -12,7 +12,7 @@ RUN go install ./gateway/...
 FROM alpine:3.13
 COPY --from=builder /go/bin/gateway /bin/gateway
 # 设置环境变量
-ENV ADDR=:8081
+ENV ADDR=:8090
 # 不真正暴露端口
 EXPOSE 8090
 # start server

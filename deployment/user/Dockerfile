@@ -12,9 +12,9 @@ RUN go install ./user/...
 FROM alpine:3.13
 COPY --from=builder /go/bin/user /bin/user
 # 设置环境变量
-ENV ADDR=:8081
+ENV ADDR=:8082
 # 不真正暴露端口
-EXPOSE 8081
+EXPOSE 8082
 # start server
 ENTRYPOINT [ "/bin/user" ]
 # CMD [ "executable" ] # 跟在ENTRYPOINT后额外参数

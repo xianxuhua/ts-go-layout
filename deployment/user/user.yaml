@@ -1,34 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: user
   labels:
-    app: gateway
+    app: user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: user
   template:
     metadata:
       labels:
-        app: gateway
+        app: user
     spec:
       containers:
-        - name: gateway
-          image: ccr.ccs.tencentyun.com/ts-go/gateway:1.0
+        - name: user
+          image: ccr.ccs.tencentyun.com/ts-go/user:1.0
           ports:
             - containerPort: 8090
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: MYSQL_DSN
+              value:
       imagePullSecrets:
         - name: qcloudregistrykey
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway
+  name: user
 spec:
   selector:
-    app: gateway
+    app: user
   ports:
     - protocol: TCP
       port: 8090

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: mysql
+          image: biarms/mysql
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+        - name:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  selector:
+    app: server
+  ports:
+    - name: grpc
+      protocol: TCP
+      port: 18001
+    - name: http
+      protocol: TCP
+      port: 18000
+    - name: mysql
+      protocol: TCP
+      port: 3306
+  type: ClusterIP
